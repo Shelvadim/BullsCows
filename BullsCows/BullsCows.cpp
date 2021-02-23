@@ -2,27 +2,68 @@
 //
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
+void PrintIntro();
+void PlayGame();
+
+bool AskToPlayAgain();
+
+string GetGuess();
+
 int main()
-{
-    constexpr int WORD_LENGTH = 5;
-
-    cout << "Wellcome to Bulls and Cows, a fun word game.\n";
-    cout << "Can you guess the " << WORD_LENGTH;
-    cout << " letter isogram I am thinking off?\n";
-
+{    
+    bool bReplay = false;
+    do {        
+        PrintIntro();
+        PlayGame();
+        bReplay = AskToPlayAgain();
+    } while (bReplay);        
+          
     return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+void PrintIntro() 
+{
+    // intro
+    constexpr int WORD_LENGTH = 5;
+    cout << "Wellcome to Bulls and Cows, a fun word game.\n";
+    cout << "Can you guess the " << WORD_LENGTH;
+    cout << " letter isogram I am thinking off?\n";
+    cout << endl;
+    return;
+}
+
+void PlayGame()
+{
+    constexpr int NUMBER_OF_TURN = 5;
+    for (int i = 0; i < NUMBER_OF_TURN; i++) {
+        string Guess = GetGuess();
+        cout << "You guess is: " << Guess << "\n";
+        cout << endl;
+    }
+
+}
+
+
+string GetGuess()
+{
+    // get a guesse from the player
+    string Guess = "";
+    cout << "What is your guess: ";
+    getline(cin, Guess);    
+    return Guess;
+}
+
+bool AskToPlayAgain() 
+{
+    cout << "Do you want to play again y/n: ";
+    string Responce = "";
+    getline(cin, Responce);
+   
+    cout << endl;
+    return (Responce[0] == 'y') || (Responce[0] == 'Y');
+}
